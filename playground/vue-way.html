@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="app"></div>
+    <script>
+        var div = document.querySelector('#app');
+        var viewModel = {}; //객체선언
+        /*
+        객체 동작을 재정의하는 API : 동작을 바꿀 수 있다
+        Object.defineProperty(대상객체, 객체의속성, {
+            //정의할 내용
+            get : function(){
+                //속성에 접근했을 때
+                대상객체.객체의속성
+            },
+            set : function(newValue){
+                //속성에 값을 할당했을 때
+            }
+        }); 
+        */
+
+        Object.defineProperty(viewModel, 'str', {
+            get: function(){
+                console.log('접근');
+            },
+            set: function (newValue){
+                console.log('할당', newValue);
+                div.innerHTML = newValue;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>instance</title>
+</head>
+<body>
+    <div id="app">
+        <!--...-->
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var options = {}
+        var vm = new Vue({
+            el: '#app', //#app에 인스턴스를 붙이겠다. #app 안에서 vue의 기능과 속성들이 유요해진다.
+            data: {
+                message: 'hi'
+            }
+        });
+    </script>
+</body>
+</html>

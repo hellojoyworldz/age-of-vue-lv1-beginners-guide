@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="App"></div>
+
+    <script>
+        var div = document.querySelector('#App'); // = $('#app')
+        var str = 'hello world';
+        div.innerHTML = str;
+
+        /* 일반적인 웹 개발 방식 */
+        str = 'hello world!!!'; //내용이 바뀌어도 반영되지 않음
+        div.innerHTML = str; // 바뀐 내용을 다시한번 대입해야 함 -> 마지막으로 갱신된 값이 적용됨 
+    </script>
+</body>
+</html>
