@@ -39,7 +39,7 @@ template, script, style 이 한 파일에 있다.
 src/components/HelloWorld.vue 는 필요가 없다.   
 App.vue 에 template, script, style 셋팅을 한다.  
 template root는 1개의 element만 있어야 한다.  
-```
+```vue
 <template>
     <div>{{str}}</div>
 </template>
@@ -65,3 +65,119 @@ export default {
 }
 </script>
 ```
+
+# 11-2.
+# 11-3. props 속성 사용하기
+App.vue
+```vue
+<template>
+    <app-header v-blind:propsdata="str"><!--부모의 data str 을 자식에서 props로 받아서 쓴다--></app-header>
+</template>
+<script>
+import AppHeader from './components/AppHeader.vue' // 컴포넌트 내용을 정의하고 그 내용을 변수에 넣어서 사용
+export default{
+    data : function(){
+        return {
+            str:'Header'
+        }
+    },
+    components : {
+        'app-header' : AppHeader // 변수에 정의된 컴포넌트 등록
+    }
+
+}
+</script>
+```
+AppHeader.vue
+```vue
+<template>
+    <header>
+        <h1>{{ propsdata }}</h1>
+    </header>
+</template>
+<script>
+export default{
+    props: ['propsdata'] // 부모에게서 porps로 propsdata 받아와서 쓴다
+}
+</script>
+```
+
+# 11-4. event emit 구현하기
+App.vue
+```vue
+<template>
+    <app-header v-blind:propsdata="str"
+    v-on:renew="renewStr"><!--컴포넌트를 등록한 태그에서 이벤트를 받는다--></app-header>
+</template>
+<script>
+import AppHeader from './components/AppHeader.vue' 
+export default{
+    data : function(){
+        return {
+            str:'Header'
+        }
+    },
+    components : {
+        'app-header' : AppHeader 
+    },
+    methods:{
+        renewStr:function(){
+           this.str="hi!"
+        },
+    },
+}
+</script>
+```
+AppHeader.vue
+```vue
+<template>
+    <header>
+        <h1>{{ propsdata }}</h1>
+        <button v-on:click="sendEvent">send</button>
+    </header>
+</template>
+<script>
+export default{
+    props:['propsdata'],
+    methods:{
+        sendEvent:function(){
+            this.$emit('renew') // renew 라는 이벤트가 부모 컨포넌트로 전달된다 
+        }
+    }
+}
+</script>
+```
+
+# 11-5.
+[NPM 소개 강좌](https://www.inflearn.com/course/lecture?tab=curriculum&courseSlug=%ED%94%84%EB%9F%B0%ED%8A%B8%EC%97%94%EB%93%9C-%EC%9B%B9%ED%8C%A9&unitId=37370)  
+[NPM 소개 문서](https://joshua1988.github.io/webpack-guide/build/node-npm.html) 
+
+vue cli : command line interface 명령어 실행도구(보조도구) 프로젝트  
+npm run serve : package.json 명령어가 script에 정의되어있음
+
+public/index.html : 하나의 파일로 변환이 되서 주입된다. (웹펙 살펴보기)
+src/main.js : 내용들을 통해 App.vue 등등의 내용이 들어갈 수 있다.  
+
+# 12-1.
+[이벤트 버블링과 캡쳐링 블로그 글](https://joshua1988.github.io/web-development/javascript/event-propagation-delegation/)
+ 참고
+CLI 버전이 업데이트되면서 기본적으로 ESLint 오류가 나면 화면을 조작할 수 없게 되었습니다. ESLint 에러를 화면에 표시하지 않으려면 아래와 같이 설정해주세요.
+
+1. 프로젝트 폴더에 `vue.config.js` 파일 생성
+
+2. `vue.config.js` 파일에 아래 내용 입력
+
+module.exports = {
+  devServer: {
+    overlay: false
+  }
+}
+3. 파일 저장
+
+4. `Ctrl + C`로 서버 종료 후 `npm run serve`로 다시 실행
+
+5. 결과 확인
+
+# 12-3.
+npm i axios
+import axios from 'axios'
